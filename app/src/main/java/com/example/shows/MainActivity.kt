@@ -67,6 +67,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 startActivity(Intent(this, SignInActivity::class.java))
                 true
             }
+            R.id.maze -> {
+                startActivity(Intent(this, SignInActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

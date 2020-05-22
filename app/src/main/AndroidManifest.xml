@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".SignInActivity" />
+        <activity android:name=".MazeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
