@@ -2,6 +2,7 @@ package com.example.shows.di.modules
 
 import android.content.Context
 import com.example.shows.R
+import com.example.shows.di.scopes.ApplicationScope
 import com.example.shows.repository.SignInRepository
 import com.example.shows.repository.SignInRepositoryImpl
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -15,19 +16,19 @@ import javax.inject.Singleton
 class FirebaseModule {
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideRep(repository: SignInRepositoryImpl): SignInRepository = repository
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideFirebaseAnalytics(context: Context): FirebaseAnalytics = FirebaseAnalytics.getInstance(context)
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideGoogleSignInOptions(): GoogleSignInOptions =
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(R.string.default_web_client_id.toString())

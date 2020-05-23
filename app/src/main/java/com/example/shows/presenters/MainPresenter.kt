@@ -92,7 +92,7 @@ class MainPresenter @Inject constructor(
         throw NullPointerException("Fake null pointer exception")
     }
 
-    private fun getDataSource(): ArrayList<Shows> = arrayListOf(
+    fun getDataSource(): ArrayList<Shows> = arrayListOf(
         Shows("Supernatural", "supernatural"),
         Shows("How I met your mother", "comedy"),
         Shows("Friends", "comedy"),

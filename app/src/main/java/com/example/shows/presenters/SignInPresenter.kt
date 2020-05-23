@@ -13,10 +13,6 @@ class SignInPresenter @Inject constructor(
         if(repository.signIn(email,password)) viewState.goToMain()
     }
 
-    fun signInWithNumber(number: String, password: String) {
-        if(repository.signInWithPhoneNumber(number,password)) viewState.goToMain()
-    }
-
     fun signInWithGoogle(string: String) {
         if(repository.signInWithGoogle(string)) viewState.goToMain()
     }

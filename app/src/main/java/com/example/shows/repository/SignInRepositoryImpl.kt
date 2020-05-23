@@ -30,7 +30,6 @@ class SignInRepositoryImpl @Inject constructor(val context: Context,
                                                var gso: GoogleSignInOptions): SignInRepository,
     GoogleApiClient.OnConnectionFailedListener {
     private var googleApiClient: GoogleApiClient? = null
-    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var verificationInProgress = false
     private var adView: AdView? = null
 
@@ -111,48 +110,6 @@ class SignInRepositoryImpl @Inject constructor(val context: Context,
         if (adView != null) {
             adView?.destroy()
         }
-    }
-
-    override fun signInWithPhoneNumber(number: String, password: String):Boolean {
-        resendVerificationCode(number, resendToken)
-        return true
-    }
-
-    private fun resendVerificationCode(
-        phoneNumber: String,
-        token: PhoneAuthProvider.ForceResendingToken?
-    ) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            phoneNumber, 60, TimeUnit.SECONDS, context as Activity, callbacks, token)
-    }
-
-    var callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            Log.d("SignIn", "onVerificationCompleted:$credential")
-            verificationInProgress = false
-            signInWithPhoneAuthCredential(credential)
-        }
-
-        override fun onVerificationFailed(e: FirebaseException) {
-            Log.w("SignIn", "onVerificationFailed", e)
-            verificationInProgress = false
-            if (e is FirebaseAuthInvalidCredentialsException) {
-                Log.d("SignIn", "Invalid phone number")
-            } else if (e is FirebaseTooManyRequestsException) {
-                Log.d("SignIn", "Quota exceeded.")
-            }
-        }
-    }
-
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("SignIn", "signInWithCredential:success")
-                } else {
-                    Log.w("SignIn", "signInWithCredential:failure", task.exception)
-                }
-            }
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {

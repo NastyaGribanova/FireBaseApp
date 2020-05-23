@@ -8,7 +8,6 @@ interface SignInRepository {
     fun signIn(email: String, password: String):Boolean
     fun signInWithGoogle(string: String):Boolean
     fun signOut()
-    fun signInWithPhoneNumber(number: String, password: String):Boolean
     fun reserPassword(email: String):Boolean
     fun authUser():Boolean
     fun initAdd(adView: AdView)
