@@ -10,4 +10,8 @@
         android:id="@+id/logout"
         android:icon="@drawable/ic_redo_black_24dp"
         android:title="Logout" />
+
+    <item
+        android:id="@+id/maze"
+        android:title="Maze" />
 </menu>
